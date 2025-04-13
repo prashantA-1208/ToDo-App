@@ -1,12 +1,16 @@
 package main
 
 import (
+	"prashantA-1208/ToDo-App.git/db"
 	"prashantA-1208/ToDo-App.git/handlers"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+
+	db.Connect()
+
 	router := gin.Default()
 
 	router.GET("/tasks", handlers.GetTasks)
