@@ -19,6 +19,9 @@ func main() {
 	router.PUT("/tasks/:id", handlers.UpdateTask)
 	router.DELETE("/tasks/:id", handlers.DeleteTask)
 
+	router.POST("/signup", handlers.Signup)
+	router.POST("/login", handlers.Login)
+
 	router.Run(":8080")
 
 }

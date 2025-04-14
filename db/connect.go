@@ -13,6 +13,7 @@ import (
 
 var Client *mongo.Client
 var TaskCollection *mongo.Collection
+var UserCollection *mongo.Collection
 
 func Connect() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -27,4 +28,5 @@ func Connect() {
 	}
 
 	TaskCollection = Client.Database("ToDo-App").Collection("tasks")
+	UserCollection = Client.Database("yourdbname").Collection("users")
 }
