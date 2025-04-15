@@ -26,6 +26,14 @@ func CreateTask(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to create task"})
 		return
 	}
+	userID, exists := c.Get("userId")
+if !exists {
+	c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+	return
+}
+
+uid, _ := primitive.ObjectIDFromHex(userID.(string))
+task.UserID = uid
 
 	c.JSON(http.StatusCreated, task)
 }

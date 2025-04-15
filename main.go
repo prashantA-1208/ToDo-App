@@ -13,14 +13,19 @@ func main() {
 
 	router := gin.Default()
 
-	router.GET("/tasks", handlers.GetTasks)
-	router.GET("/tasks/:id", handlers.GetTaskByID)
-	router.POST("/tasks", handlers.CreateTask)
-	router.PUT("/tasks/:id", handlers.UpdateTask)
-	router.DELETE("/tasks/:id", handlers.DeleteTask)
-
 	router.POST("/signup", handlers.Signup)
 	router.POST("/login", handlers.Login)
+
+	// Protected routes
+	authorized := router.Group("/")
+	authorized.Use(middleware.AuthMiddleware())
+	{
+		authorized.GET("/tasks", handlers.GetTasks)
+		authorized.GET("/tasks/:id", handlers.GetTaskByID)
+		authorized.POST("/tasks", handlers.CreateTask)
+		authorized.PUT("/tasks/:id", handlers.UpdateTask)
+		authorized.DELETE("/tasks/:id", handlers.DeleteTask)
+	}
 
 	router.Run(":8080")
 

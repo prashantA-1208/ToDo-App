@@ -28,5 +28,5 @@ func Connect() {
 	}
 
 	TaskCollection = Client.Database("ToDo-App").Collection("tasks")
-	UserCollection = Client.Database("yourdbname").Collection("users")
+	UserCollection = Client.Database("ToDo-App").Collection("users")
 }
