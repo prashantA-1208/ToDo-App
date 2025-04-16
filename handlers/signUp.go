@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 	"time"
+	"strings"
 
 	"prashantA-1208/ToDo-App.git/db"
 	"prashantA-1208/ToDo-App.git/models"
@@ -24,6 +25,8 @@ func Signup(c *gin.Context) {
 	// Check if email already exists
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
+
+	user.Email = strings.TrimSpace(strings.ToLower(user.Email))
 
 	count, err := db.UserCollection.CountDocuments(ctx, bson.M{"email": user.Email})
 	if err != nil {
@@ -51,5 +54,5 @@ func Signup(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"message": "User created successfully"})
+	c.JSON(http.StatusCreated, gin.H{"message": "User created successfully","hashed password":user.Password})
 }

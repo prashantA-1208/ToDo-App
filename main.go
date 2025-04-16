@@ -3,6 +3,7 @@ package main
 import (
 	"prashantA-1208/ToDo-App.git/db"
 	"prashantA-1208/ToDo-App.git/handlers"
+	"prashantA-1208/ToDo-App.git/middleware"
 
 	"github.com/gin-gonic/gin"
 )
