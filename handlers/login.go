@@ -25,8 +25,9 @@ func Login(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
 		return
 	}
-
+	
 	req.Email = strings.TrimSpace(strings.ToLower(req.Email))
+	
 
 	var user models.User
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -34,14 +35,11 @@ func Login(c *gin.Context) {
 	
 	err := db.UserCollection.FindOne(ctx, bson.M{"email": req.Email}).Decode(&user)
 	if err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Email","email":req.Email,"userEmail":user.Email})
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid Email"})
 		return
 	}
 	
-	c.JSON(http.StatusOK, gin.H{
-		"password from userdb": user.Password,
-		"request password":req.Password,
-	})
+	
 	// Compare passwords
 	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(req.Password)); err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})

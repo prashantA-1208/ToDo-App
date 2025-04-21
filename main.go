@@ -1,10 +1,13 @@
 package main
 
 import (
+	"time"
+
 	"prashantA-1208/ToDo-App.git/db"
 	"prashantA-1208/ToDo-App.git/handlers"
 	"prashantA-1208/ToDo-App.git/middleware"
-
+	
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,6 +16,14 @@ func main() {
 	db.Connect()
 
 	router := gin.Default()
+
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:5173"}, // frontend URL
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
 
 	router.POST("/signup", handlers.Signup)
 	router.POST("/login", handlers.Login)
