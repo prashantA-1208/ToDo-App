@@ -37,6 +37,7 @@ func main() {
 		authorized.POST("/tasks", handlers.CreateTask)
 		authorized.PUT("/tasks/:id", handlers.UpdateTask)
 		authorized.DELETE("/tasks/:id", handlers.DeleteTask)
+		authorized.GET("/user", handlers.GetUser)
 	}
 
 	router.Run(":8080")

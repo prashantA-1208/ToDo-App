@@ -30,9 +30,9 @@ export default function TaskList() {
   };
 
   return (
-    <ul>
+    <ul className='container'>
       {tasks.map((task) => (
-        <li key={task.id} className="flex justify-between items-center py-1">
+        <li key={task.id} >
           <span className={task.completed ? 'line-through' : ''}>{task.title}</span>
           <div className="flex gap-2">
             <button onClick={() => handleToggle(task)} className="text-sm text-green-600"> {task.completed ? 'Completed' : 'Pending'}</button>
