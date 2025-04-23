@@ -25,7 +25,7 @@ export default function Dashboard() {
 
   return (
     <div className="p-6">
-      <h1 className="text-xl mb-4">{user.username}'s Task</h1>
+      <h1 className="text-xl mb-4">{user.username ? `${user.username}'s Task` : `Please Login To See Your Task` }</h1>
       <CreateTaskPage onTaskCreated={() => window.location.reload()} />
       <TaskList />
     </div>

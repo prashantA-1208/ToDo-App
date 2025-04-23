@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { login } from '../api/auth';
 import { useNavigate } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
+import { useAuth } from '../context/AuthContext';
 
-
-export default function LoginPage({ setAuthenticated }) {
+export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { setAuthenticated } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

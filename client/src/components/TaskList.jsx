@@ -35,7 +35,7 @@ export default function TaskList() {
         <li key={task.id} >
           <span className={task.completed ? 'line-through' : ''}>{task.title}</span>
           <div className="flex gap-2">
-            <button onClick={() => handleToggle(task)} className="text-sm text-green-600"> {task.completed ? 'Completed' : 'Pending'}</button>
+            <button onClick={() => handleToggle(task)} className={task.completed ? 'button-Completed' : 'button-Pending'}> {task.completed ? 'Completed' : 'Pending'}</button>
             <button onClick={() => handleDelete(task.id)} className="text-sm text-red-600">Delete</button>
           </div>
         </li>
