@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="footer-div">
         <p>© {new Date().getFullYear()} ToDo App. All rights reserved.</p>
         <p>
-          Built with ❤️ by <span className="font-medium">You</span>
+          Built with ❤️ by <span className="font-medium">Prashant</span>
         </p>
       </div>
     </footer>

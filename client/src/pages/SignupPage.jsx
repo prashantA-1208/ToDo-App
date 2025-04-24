@@ -8,11 +8,24 @@ export default function SignupPage() {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const navigate = useNavigate();
+  const [error, setError] = useState(''); // for error message
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signup({ username, email, password });
-    navigate('/login');
+    try{
+      await signup({ username, email, password });
+      navigate('/login');
+    }catch(err){
+      if (err.response && err.response.status === 400) {
+        setError('Email already exists');
+      } else {
+        setError('Something went wrong. Please try again later.');
+      }
+    }
+
+    
+    
   };
 
   return (
@@ -24,6 +37,7 @@ export default function SignupPage() {
       onEmailChange={setEmail}
       onPasswordChange={setPassword}
       onSubmit={handleSubmit}
+      error={error}
     />
   );
 }

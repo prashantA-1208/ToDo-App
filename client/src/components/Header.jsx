@@ -1,4 +1,5 @@
 import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 
 const Header = () => {
@@ -9,12 +10,29 @@ const Header = () => {
       <h1 className="header-h1">📝 ToDo App {user.username ? `Hello ${user.username}` : `Please Login To See Your Task` }!</h1>
 
       <div className="header-button">
-        <button
-          onClick={logout}
-        >
-          Logout
-        </button>
-        
+        {user.username ? (
+          <button
+            onClick={logout}
+            className="link-button"
+          >
+            Logout
+          </button>
+        ) : (
+          <>
+            <Link
+              to="/login"
+              className="link-button"
+            >
+              Login
+            </Link>
+            <Link
+              to="/signup"
+              className="link-button"
+            >
+              SignUp
+            </Link>
+          </>
+        )}
       </div>
     </header>
   );
