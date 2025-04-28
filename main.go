@@ -2,6 +2,8 @@ package main
 
 import (
 	"time"
+	"log"
+	"os"
 
 	"prashantA-1208/ToDo-App.git/db"
 	"prashantA-1208/ToDo-App.git/handlers"
@@ -9,9 +11,16 @@ import (
 	
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	port := os.Getenv("PORT")
 
 	db.Connect()
 
@@ -40,6 +49,7 @@ func main() {
 		authorized.GET("/user", handlers.GetUser)
 	}
 
-	router.Run(":8080")
+	//router.Run(":8080")
+	router.Run(":" + port)
 
 }

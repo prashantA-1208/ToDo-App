@@ -1,9 +1,10 @@
 import { useAuth } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useLocation  } from 'react-router-dom';
 
 
 const Header = () => {
   const { user, logout } = useAuth();
+  const location = useLocation(); // 👈 Get current route
 
   return (
     <header >
@@ -19,18 +20,17 @@ const Header = () => {
           </button>
         ) : (
           <>
-            <Link
-              to="/login"
-              className="link-button"
-            >
-              Login
-            </Link>
-            <Link
-              to="/signup"
-              className="link-button"
-            >
-              SignUp
-            </Link>
+            {location.pathname !== '/login' && (
+              <Link to="/login" className="link-button">
+                Login
+              </Link>
+            )}
+            
+            {location.pathname !== '/signup' && (
+              <Link to="/signup" className="link-button">
+                SignUp
+              </Link>
+            )}
           </>
         )}
       </div>

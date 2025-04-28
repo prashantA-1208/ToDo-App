@@ -14,6 +14,18 @@ export default function SignupPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try{
+      if(!username){
+        setError("Username can't be empty")
+        return;
+      }
+      if(!email){
+        setError("Email can't be empty")
+        return;
+      }
+      if(!password){
+        setError("Password can't be empty")
+        return;
+      }
       await signup({ username, email, password });
       navigate('/login');
     }catch(err){

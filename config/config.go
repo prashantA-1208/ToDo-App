@@ -1,6 +1,9 @@
 package config
 
-import "os"
+import (
+	"os"
+)
+
 
 func GetMongoURI() string {
 	uri := os.Getenv("MONGO_URI")

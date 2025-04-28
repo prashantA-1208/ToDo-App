@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getUser } from '../api/tasks';
 import TaskList from '../components/TaskList';
-import CreateTaskPage from './CreateTaskPage';
-
+import CreateTaskForm from '../components/CreateTaskForm';
 
 export default function Dashboard() {
 
@@ -26,7 +25,7 @@ export default function Dashboard() {
   return (
     <div className="p-6">
       <h1 className="text-xl mb-4">{user.username ? `${user.username}'s Task` : `Please Login To See Your Task` }</h1>
-      <CreateTaskPage onTaskCreated={() => window.location.reload()} />
+      <CreateTaskForm  />
       <TaskList />
     </div>
   );
