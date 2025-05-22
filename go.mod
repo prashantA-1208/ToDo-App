@@ -1,6 +1,6 @@
 module prashantA-1208/ToDo-App.git
 
-go 1.21
+go 1.20
 
 
 require github.com/gin-gonic/gin v1.10.0
