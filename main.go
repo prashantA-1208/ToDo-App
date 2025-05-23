@@ -26,6 +26,11 @@ func main() {
 
 	router := gin.Default()
 
+	router.Static("/static", "./static")
+	router.NoRoute(func(c *gin.Context) {
+    	c.File("./static/index.html")
+	})
+
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:5173"}, // frontend URL
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
@@ -48,6 +53,8 @@ func main() {
 		authorized.DELETE("/tasks/:id", handlers.DeleteTask)
 		authorized.GET("/user", handlers.GetUser)
 	}
+
+	
 
 	//router.Run(":8080")
 	router.Run(":" + port)
